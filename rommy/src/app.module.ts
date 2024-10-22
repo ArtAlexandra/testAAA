@@ -26,7 +26,7 @@ dotenv.config();
         port: 5432,
         username: 'postgres',
         password: process.env.PASSWORD,
-        database: 'rommy',
+        database: process.env.DATABASE,
         models: [User],
        autoLoadModels: true,
       
