@@ -87,7 +87,7 @@ const Registration = ()=>{
         }
     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
       <Button type="primary" htmlType="submit">
-        Войти
+        Зарегистрироваться
       </Button>
     </Form.Item>
   </Form>
