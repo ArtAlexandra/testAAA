@@ -1,0 +1,26 @@
+.card{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 30px;
+    display: inline-flex;
+    justify-content: center;
+    
+    .card__image{
+        margin-right: 50px;
+        img{
+        width: 350px;
+        height: auto;
+        }
+    }
+    .card__details{
+        margin-left: 50px;
+        .card__title{
+           width: 200px;
+           Button{
+            margin-top: 20px;
+           }
+        }
+    }
+  
+}

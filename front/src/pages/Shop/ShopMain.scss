@@ -1,0 +1,43 @@
+.shopmain{
+    font-size: 14px;
+    font-weight: 300;
+    color: #4B483F;
+    .shopmain__container{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        
+        .shopmain__main{
+
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            img{
+                width: 300px;
+                height: auto;
+            }
+        }
+        .shopmain__goods{
+            column-count: 3; 
+            column-gap: 20px;
+            .shopmain__goods_item{
+                width: 300px;
+                break-inside: avoid;
+                img{
+                    width: 200px;
+                }
+            }
+        }
+        
+        .shopmain__addtype{
+            width: 300px;
+            display: flex;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            Button{
+                margin-left: 10px;
+            }
+        }
+    }
+}
