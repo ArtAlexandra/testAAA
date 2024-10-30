@@ -9,12 +9,13 @@ import { GoodsModule } from './goods/goods.module';
 import { SizeModule } from './size/size.module';
 //import { ImagesGoodsModule } from './images-goods/images-goods.module';
 import { BasketsModule } from './baskets/baskets.module';
+//import { PurchasedModule } from './purchased/purchased.module';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
 @Module({
-  controllers: [],
+ 
   providers: [],
   imports: [
     // ConfigModule.forRoot({
@@ -40,7 +41,8 @@ dotenv.config();
     GoodsModule,
     SizeModule,
     //ImagesGoodsModule,
-    BasketsModule
+    BasketsModule,
+    //PurchasedModule,
   ],
 })
 export class AppModule {}

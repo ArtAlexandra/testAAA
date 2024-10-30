@@ -6,6 +6,8 @@ import { User } from 'src/users/users.model';
 import { Goods } from 'src/goods/goods.model';
 import { UsersService } from '../users/users.service';
 import { CreateBasketDto } from './dto/create-baskets.dto';
+import { Purchased } from 'src/purchased/purchased.model';
+import { Shop } from 'src/shops/shops.model';
 
 @Injectable()
 export class BasketsService {
@@ -19,6 +21,11 @@ export class BasketsService {
 
         @InjectModel(Goods)
         private goodsModel : typeof Goods,
+
+
+        @InjectModel(Shop)
+        private shopModel:typeof Shop
+
       ){}
   
 
@@ -73,10 +80,40 @@ export class BasketsService {
             const balance = goods.user.balance - goods.quantity * goods.goods.price;
             let quantity = 0;
             const payment = true;
-            await this.basketModel.update({ quantity, payment}, {where: {id_b:id}});
             quantity = goods.goods.quantity - goods.quantity;
+
+
+            const purchased = new Purchased();
+             
+            const goodsOld = await this.goodsModel.findOne({ 
+                where:{id_g:id},
+                include: [{model: Shop}]
+               
+            });
+            const shop = await this.shopModel.findOne({ 
+                where:{id:goodsOld.shopId}
+            });
+            
+            const date = new Date();
+
+            purchased.goods = goodsOld;
+            purchased.goodsId = goodsOld.id_g;
+            purchased.shop = shop;
+            purchased.shopId = shop.id;
+            purchased.date = date;
+            purchased.count = goods.quantity;
+            purchased.price = goods.goods.price;
+
+            await purchased.save();
+
+            await this.basketModel.update({ quantity, payment}, {where: {id_b:id}});
             await this.goodsModel.update({quantity}, {where: {id_g: goods.goods.id_g}});
             await this.userModel.update({balance},{where: {id: goods.user.id}});
+
+
+           
+
+
             return `Товар успешно куплен`;
       }
      
@@ -100,9 +137,9 @@ export class BasketsService {
         const existingGoodsByGoodsId = await this.findOne({
             where: { goodsId: createBasketDto.goodsId}
         });
-        if(!existingGoodsByGoodsId){
-            throw new Error('Такого товара не существует')
-        }
+        // if(!existingGoodsByGoodsId){
+        //     throw new Error('Такого товара не существует')
+        // }
 
         const existinguserById = await this.userModel.findOne({
             where: { id: createBasketDto.userId}

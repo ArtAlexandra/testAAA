@@ -5,9 +5,15 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Basket } from './baskets.model';
 import { User } from 'src/users/users.model';
 import { Goods } from 'src/goods/goods.model';
+import { Purchased } from 'src/purchased/purchased.model';
+import { Shop } from 'src/shops/shops.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Basket]), SequelizeModule.forFeature([User]), SequelizeModule.forFeature([Goods])],
+  imports: [SequelizeModule.forFeature([Basket]), SequelizeModule.forFeature([User]), SequelizeModule.forFeature([Goods]),
+  SequelizeModule.forFeature([Purchased]),
+  SequelizeModule.forFeature([Shop]),
+
+],
   controllers: [BasketsController],
   providers: [BasketsService],
   exports: [BasketsService]
